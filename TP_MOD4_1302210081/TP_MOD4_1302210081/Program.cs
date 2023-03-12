@@ -11,6 +11,10 @@ namespace TP_MOD4_1302210081
 
             Console.WriteLine("==== DOOR KEY ====");
 
+            DoorMachine pintu = new DoorMachine();
+
+            pintu.kunci();
+
         }
 
     }
@@ -50,3 +54,36 @@ class KodePos
         }
     }
 }
+
+class DoorMachine
+{
+    enum State { Locked, Opened };
+    public void kunci()
+    {
+        State state = State.Locked;
+
+        String[] screenName = { "Terkunci", "Terbuka" };
+        do
+        {
+            Console.WriteLine("Pintu " + screenName[(int)state]);
+            Console.Write("Enter Command : ");
+            String command = Console.ReadLine();
+            switch (state)
+            {
+                case State.Locked:
+                    if (command == "Open Door")
+                    {
+                        state = State.Opened;
+                    }
+                    break;
+                case State.Opened:
+                    if (command == "Lock Door")
+                    {
+                        state = State.Locked;
+                    }
+                    break;
+            }
+        } while (state != State.Locked);
+    }
+}
+
